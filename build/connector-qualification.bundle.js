@@ -1,11 +1,9 @@
-/*! connector-qualification.bundle.js - v1.0.0 - 2021-09-22 */
+/*! connector-qualification.bundle.js - v1.0.1 - 2021-09-22 */
 "use strict";
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var QUALIFICATION = QUALIFICATION || {}; // Source: src/cornerstone.js
 
-var CORNERSTONE = function (window, document, undefined) {
+QUALIFICATION.CORNERSTONE = function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -312,17 +310,13 @@ var CORNERSTONE = function (window, document, undefined) {
   }
 
   return {
-    CORNERSTONE: {
-      getValidationRules: getValidationRules,
-      getQualificationRules: getQualificationRules
-    }
+    getValidationRules: getValidationRules,
+    getQualificationRules: getQualificationRules
   };
-}(window, document, undefined);
-
-_extends(QUALIFICATION, CORNERSTONE); // Source: src/degreed.js
+}(window, document, undefined); // Source: src/degreed.js
 
 
-var DEGREED = function (window, document, undefined) {
+QUALIFICATION.DEGREED = function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -632,17 +626,13 @@ var DEGREED = function (window, document, undefined) {
   }
 
   return {
-    DEGREED: {
-      getValidationRules: getValidationRules,
-      getQualificationRules: getQualificationRules
-    }
+    getValidationRules: getValidationRules,
+    getQualificationRules: getQualificationRules
   };
-}(window, document, undefined);
-
-_extends(QUALIFICATION, DEGREED); // Source: src/sabacloud.js
+}(window, document, undefined); // Source: src/sabacloud.js
 
 
-var SABACLOUD = function (window, document, undefined) {
+QUALIFICATION.SABACLOUD = function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -971,17 +961,13 @@ var SABACLOUD = function (window, document, undefined) {
   }
 
   return {
-    SABACLOUD: {
-      getValidationRules: getValidationRules,
-      getQualificationRules: getQualificationRules
-    }
+    getValidationRules: getValidationRules,
+    getQualificationRules: getQualificationRules
   };
-}(window, document, undefined);
-
-_extends(QUALIFICATION, SABACLOUD); // Source: src/successfactors.js
+}(window, document, undefined); // Source: src/successfactors.js
 
 
-var SUCCESSFACTORS = function (window, document, undefined) {
+QUALIFICATION.SUCCESSFACTORS = function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -1567,13 +1553,9 @@ var SUCCESSFACTORS = function (window, document, undefined) {
   }
 
   return {
-    SUCCESSFACTORS: {
-      getValidationRules: getValidationRules,
-      getQualificationRules: getQualificationRules
-    }
+    getValidationRules: getValidationRules,
+    getQualificationRules: getQualificationRules
   };
 }(window, document, undefined);
-
-_extends(QUALIFICATION, SUCCESSFACTORS);
 
 //# sourceMappingURL=connector-qualification.bundle.js.map
