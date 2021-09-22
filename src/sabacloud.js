@@ -1,6 +1,6 @@
 var QUALIFICATION = QUALIFICATION || {};
 
-var SABACLOUD = (function (window, document, undefined) {
+QUALIFICATION.SABACLOUD = (function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -374,11 +374,7 @@ var SABACLOUD = (function (window, document, undefined) {
   }
 
   return {
-    SABACLOUD: {
-      getValidationRules,
-      getQualificationRules,
-    },
+    getValidationRules,
+    getQualificationRules,
   };
 })(window, document, undefined);
-
-Object.assign(QUALIFICATION, SABACLOUD);

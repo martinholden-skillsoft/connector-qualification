@@ -1,6 +1,6 @@
 var QUALIFICATION = QUALIFICATION || {};
 
-var DEGREED = (function (window, document, undefined) {
+QUALIFICATION.DEGREED = (function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -376,11 +376,7 @@ var DEGREED = (function (window, document, undefined) {
   }
 
   return {
-    DEGREED: {
-      getValidationRules,
-      getQualificationRules,
-    },
+    getValidationRules,
+    getQualificationRules,
   };
 })(window, document, undefined);
-
-Object.assign(QUALIFICATION, DEGREED);

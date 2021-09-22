@@ -1,6 +1,6 @@
 var QUALIFICATION = QUALIFICATION || {};
 
-var SUCCESSFACTORS = (function (window, document, undefined) {
+QUALIFICATION.SUCCESSFACTORS = (function (window, document, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -703,11 +703,7 @@ var SUCCESSFACTORS = (function (window, document, undefined) {
   }
 
   return {
-    SUCCESSFACTORS: {
-      getValidationRules,
-      getQualificationRules,
-    },
+    getValidationRules,
+    getQualificationRules,
   };
 })(window, document, undefined);
-
-Object.assign(QUALIFICATION, SUCCESSFACTORS);
