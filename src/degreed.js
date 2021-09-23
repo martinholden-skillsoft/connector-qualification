@@ -1,6 +1,6 @@
 var QUALIFICATION = QUALIFICATION || {};
 
-QUALIFICATION.DEGREED = (function (window, document, undefined) {
+QUALIFICATION.DEGREED = (function (window, document, Qualtrics, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -379,4 +379,4 @@ QUALIFICATION.DEGREED = (function (window, document, undefined) {
     getValidationRules,
     getQualificationRules,
   };
-})(window, document, undefined);
+})(window, document, Qualtrics, undefined);

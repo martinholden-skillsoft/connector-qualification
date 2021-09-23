@@ -53,7 +53,7 @@ module.exports = function (grunt) {
           },
         },
         files: {
-          "build/script.js": ["src/**/*.js"],
+          "build/script.js": ["src/polyfill/**/*.js","src/*.js"],
         },
       },
       bundle: {
