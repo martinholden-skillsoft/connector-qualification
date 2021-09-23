@@ -1,9 +1,39 @@
-/*! connector-qualification.bundle.js - v1.0.1 - 2021-09-22 */
+/*! connector-qualification.bundle.js - v1.0.2 - 2021-09-23 */
 "use strict";
 
-var QUALIFICATION = QUALIFICATION || {}; // Source: src/cornerstone.js
+var QUALIFICATION = QUALIFICATION || {}; // Source: src/polyfill/qualtrics.js
+// Polyfill Qualtrics to allow testing
 
-QUALIFICATION.CORNERSTONE = function (window, document, undefined) {
+if (typeof Qualtrics == "undefined" || typeof Qualtrics.SurveyEngine == "undefined") {
+  (function () {
+    window.Qualtrics = {};
+    window.Qualtrics.SurveyEngine = {};
+
+    window.Qualtrics.SurveyEngine.getEmbeddedData = function (key) {
+      var keyEQ = key + "=";
+      var ca = document.cookie.split(";");
+
+      for (var i = 0, len = ca.length; i < len; i++) {
+        var c = ca[i];
+
+        while (c.charAt(0) === " ") {
+          c = c.substring(1, c.length);
+        }
+
+        if (c.indexOf(keyEQ) === 0) return JSON.parse(c.substring(keyEQ.length, c.length));
+      }
+
+      return null;
+    };
+
+    window.Qualtrics.SurveyEngine.setEmbeddedData = function (key, value) {
+      document.cookie = key + "=" + JSON.stringify(value) + "; path=/";
+    };
+  })();
+} // Source: src/cornerstone.js
+
+
+QUALIFICATION.CORNERSTONE = function (window, document, Qualtrics, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -313,10 +343,10 @@ QUALIFICATION.CORNERSTONE = function (window, document, undefined) {
     getValidationRules: getValidationRules,
     getQualificationRules: getQualificationRules
   };
-}(window, document, undefined); // Source: src/degreed.js
+}(window, document, Qualtrics, undefined); // Source: src/degreed.js
 
 
-QUALIFICATION.DEGREED = function (window, document, undefined) {
+QUALIFICATION.DEGREED = function (window, document, Qualtrics, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -629,10 +659,10 @@ QUALIFICATION.DEGREED = function (window, document, undefined) {
     getValidationRules: getValidationRules,
     getQualificationRules: getQualificationRules
   };
-}(window, document, undefined); // Source: src/sabacloud.js
+}(window, document, Qualtrics, undefined); // Source: src/sabacloud.js
 
 
-QUALIFICATION.SABACLOUD = function (window, document, undefined) {
+QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -964,10 +994,10 @@ QUALIFICATION.SABACLOUD = function (window, document, undefined) {
     getValidationRules: getValidationRules,
     getQualificationRules: getQualificationRules
   };
-}(window, document, undefined); // Source: src/successfactors.js
+}(window, document, Qualtrics, undefined); // Source: src/successfactors.js
 
 
-QUALIFICATION.SUCCESSFACTORS = function (window, document, undefined) {
+QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -1556,6 +1586,6 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, undefined) {
     getValidationRules: getValidationRules,
     getQualificationRules: getQualificationRules
   };
-}(window, document, undefined);
+}(window, document, Qualtrics, undefined);
 
 //# sourceMappingURL=connector-qualification.bundle.js.map
