@@ -1,15 +1,31 @@
-/*! connector-qualification.bundle.js - v1.0.2 - 2021-09-23 */
+/*! connector-qualification.bundle.js - v1.0.3 - 2021-10-04 */
 "use strict";
 
-var QUALIFICATION = QUALIFICATION || {}; // Source: src/polyfill/qualtrics.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var QUALIFICATION = QUALIFICATION || {}; // Source: node_modules/@ungap/global-this/index.js
+
+(function (Object) {
+  (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
+    configurable: true,
+    get: get
+  }), _T_));
+
+  function get() {
+    var global = this || self;
+    global.globalThis = global;
+    delete Object.prototype._T_;
+  }
+})(Object); // Source: src/polyfill/qualtrics.js
 // Polyfill Qualtrics to allow testing
 
-if (typeof Qualtrics == "undefined" || typeof Qualtrics.SurveyEngine == "undefined") {
-  (function () {
-    window.Qualtrics = {};
-    window.Qualtrics.SurveyEngine = {};
 
-    window.Qualtrics.SurveyEngine.getEmbeddedData = function (key) {
+if (typeof globalThis.Qualtrics == "undefined" || typeof globalThis.Qualtrics.SurveyEngine == "undefined") {
+  (function () {
+    globalThis.Qualtrics = {};
+    globalThis.Qualtrics.SurveyEngine = {};
+
+    globalThis.Qualtrics.SurveyEngine.getEmbeddedData = function (key) {
       var keyEQ = key + "=";
       var ca = document.cookie.split(";");
 
@@ -26,7 +42,7 @@ if (typeof Qualtrics == "undefined" || typeof Qualtrics.SurveyEngine == "undefin
       return null;
     };
 
-    window.Qualtrics.SurveyEngine.setEmbeddedData = function (key, value) {
+    globalThis.Qualtrics.SurveyEngine.setEmbeddedData = function (key, value) {
       document.cookie = key + "=" + JSON.stringify(value) + "; path=/";
     };
   })();
