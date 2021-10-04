@@ -1,6 +1,6 @@
 {
   "name": "connector-qualification",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "JavaScript to define the validation and qualification rules for Connector Qualtrics Surveys",
   "repository": {
     "type": "git",
