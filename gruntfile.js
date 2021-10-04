@@ -53,7 +53,7 @@ module.exports = function (grunt) {
           },
         },
         files: {
-          "build/script.js": ["src/polyfill/**/*.js","src/*.js"],
+          "build/script.js": ["node_modules/@ungap/global-this/index.js","src/polyfill/**/*.js","src/*.js"],
         },
       },
       bundle: {
