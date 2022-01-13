@@ -1,4 +1,4 @@
-/*! connector-qualification.bundle.js - v1.0.3 - 2021-10-04 */
+/*! connector-qualification.bundle.js - v1.0.4 - 2022-01-13 */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -1246,7 +1246,7 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
       run: function run(answer) {
         var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
-        status = answer.toLowerCase() !== "none of the above" && answer !== "";
+        status = answer.toLowerCase() !== "no" && answer !== "";
         processed[this.name] = status;
         Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
