@@ -1,6 +1,11 @@
 var QUALIFICATION = QUALIFICATION || {};
 
-QUALIFICATION.SUCCESSFACTORS = (function (window, document, Qualtrics, undefined) {
+QUALIFICATION.SUCCESSFACTORS = (function (
+  window,
+  document,
+  Qualtrics,
+  undefined
+) {
   /**
    * @typedef {Object} QUALIFICATION.validationrule.dependencies
    * @property {String[]} and An array of property names of an object to check (AND comparison)
@@ -259,8 +264,7 @@ QUALIFICATION.SUCCESSFACTORS = (function (window, document, Qualtrics, undefined
           var processed =
             Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
           var status = false;
-          status =
-            answer.toLowerCase() !== "none of the above" && answer !== "";
+          status = answer.toLowerCase() !== "no" && answer !== "";
           processed[this.name] = status;
           Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
           return status;
@@ -682,6 +686,7 @@ QUALIFICATION.SUCCESSFACTORS = (function (window, document, Qualtrics, undefined
       },
     ],
   };
+
   /**
    * Get the validation rules
    *
