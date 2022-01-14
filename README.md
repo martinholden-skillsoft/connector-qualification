@@ -2,10 +2,6 @@
 
 Provides the qualification logic for the Skillsoft Connector Qualification Surveys in Qualtrics
 
-## Testing
-
-Open the [test/index.html](test/index.html) to run the testing
-
 ## Creating new rules
 
 It is best to copy one of the existing surveys and edit than build from new.
