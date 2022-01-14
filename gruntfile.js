@@ -13,6 +13,12 @@ module.exports = function (grunt) {
       },
     },
 
+    karma: {
+      unit: {
+        configFile: "karma.conf.js",
+      },
+    },
+
     babel: {
       options: {
         sourceMap: false,
@@ -47,13 +53,24 @@ module.exports = function (grunt) {
           banner: "var QUALIFICATION = QUALIFICATION || {};",
           sourceMap: false,
           stripBanners: false,
-          process: function(src, filepath) {
-            return '// Source: ' + filepath + '\n' +
-              src.replace(/(^|\n)[ \t]*(var QUALIFICATION = QUALIFICATION \|\| {};);?\s*/g, '$1');
+          process: function (src, filepath) {
+            return (
+              "// Source: " +
+              filepath +
+              "\n" +
+              src.replace(
+                /(^|\n)[ \t]*(var QUALIFICATION = QUALIFICATION \|\| {};);?\s*/g,
+                "$1"
+              )
+            );
           },
         },
         files: {
-          "build/script.js": ["node_modules/@ungap/global-this/index.js","src/polyfill/**/*.js","src/*.js"],
+          "build/script.js": [
+            "node_modules/@ungap/global-this/index.js",
+            "src/polyfill/**/*.js",
+            "src/*.js",
+          ],
         },
       },
       bundle: {
@@ -99,8 +116,10 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-contrib-watch");
   // Load the plugin that provides the "babel" task.
   grunt.loadNpmTasks("grunt-babel");
-  // Load the that provides the "clean" task;
+  // Load the plugin that provides the "clean" task;
   grunt.loadNpmTasks("grunt-contrib-clean");
+// Load the plugin that provides the "clean" task;
+  grunt.loadNpmTasks("grunt-karma");
 
   // Default task(s).
   grunt.registerTask("build", [
@@ -109,6 +128,7 @@ module.exports = function (grunt) {
     "concat:bundle",
     "uglify",
     "clean",
+    "karma",
   ]);
   grunt.registerTask("default", ["build"]);
 };
