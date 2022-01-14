@@ -205,7 +205,7 @@ describe('CORNERSTONE', function () {
 
     it("Edge Marketplace selected, no SAML", function () {
       var testdefinition = {
-        description: "Edge Marketplace not selected",
+        description: "Edge Marketplace selected, no SAML",
         processed: {
           edge: true,
           embeddedsaml: false,
