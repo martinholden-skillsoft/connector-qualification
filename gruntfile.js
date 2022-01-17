@@ -1,5 +1,6 @@
 module.exports = function (grunt) {
   pkg = grunt.file.readJSON("package.json");
+  pkg.currentdate = new Date();
 
   // Project configuration.
   grunt.initConfig({
@@ -50,7 +51,8 @@ module.exports = function (grunt) {
     concat: {
       src: {
         options: {
-          banner: "var QUALIFICATION = QUALIFICATION || {};",
+          banner:
+            "var QUALIFICATION = QUALIFICATION || {};\nQUALIFICATION.VERSION = '<%= pkg.version %>';\nQUALIFICATION.DATE = new Date('<%= grunt.template.date(pkg.currentdate, 'isoDateTime') %>');\n\n",
           sourceMap: false,
           stripBanners: false,
           process: function (src, filepath) {
@@ -76,7 +78,7 @@ module.exports = function (grunt) {
       bundle: {
         options: {
           banner:
-            '/*! <%= pkg.name %>.bundle.js - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+            '/*! <%= pkg.name %>.bundle.js - v<%= pkg.version %> - <%= grunt.template.date(pkg.currentdate, "isoDateTime") %> */\n',
           sourceMap: true,
           stripBanners: false,
         },
@@ -118,7 +120,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-babel");
   // Load the plugin that provides the "clean" task;
   grunt.loadNpmTasks("grunt-contrib-clean");
-// Load the plugin that provides the "clean" task;
+  // Load the plugin that provides the "clean" task;
   grunt.loadNpmTasks("grunt-karma");
 
   // Default task(s).
