@@ -1,9 +1,11 @@
-/*! connector-qualification.bundle.js - v1.1.0 - 2022-01-14 */
+/*! connector-qualification.bundle.js - v1.1.1 - 2022-01-17T14:07:51+0000 */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-var QUALIFICATION = QUALIFICATION || {}; // Source: node_modules/@ungap/global-this/index.js
+var QUALIFICATION = QUALIFICATION || {};
+QUALIFICATION.VERSION = '1.1.1';
+QUALIFICATION.DATE = new Date('2022-01-17T14:07:51+0000'); // Source: node_modules/@ungap/global-this/index.js
 
 (function (Object) {
   (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
