@@ -40,6 +40,7 @@ describe("WORKDAY", function () {
     // runs before each test in this block
     Qualtrics.SurveyEngine.setEmbeddedData("processed_state", {
       ccl: false,
+      email: false,
       samlidp: false,
       samlid: false,
       saml: false,
@@ -52,17 +53,20 @@ describe("WORKDAY", function () {
   });
 
   describe("Expect qualification to succeed", function () {
-    it("Cloud Connect for Learning selected, SAML and SAMLID", function () {
+    it("Cloud Connect for Learning selected, email, SAML and SAMLID", function () {
       var testdefinition = {
-        description: "Cloud Connect for Learning selected and embedded SAML",
+        description:
+          "Cloud Connect for Learning selected, email in Workday Profile and embedded SAML",
         processed: {
           ccl: true,
+          email: true,
           samlidp: true,
           samlid: true,
           saml: true,
         },
         qualified: {
           ccl_qualification: "PASSED",
+          email_qualification: "PASSED",
           qualification: "PASSED",
           saml_qualification: "PASSED",
           samlidp_qualification: "PASSED",
@@ -70,6 +74,7 @@ describe("WORKDAY", function () {
         },
         qids: {
           QID4: "Yes",
+          QID44: "Yes",
           QID8: "Yes",
           QID43: "Yes",
         },
@@ -87,12 +92,14 @@ describe("WORKDAY", function () {
         description: "Cloud Connect for Learning not selected",
         processed: {
           ccl: false,
+          email: false,
           samlidp: false,
           samlid: false,
           saml: false,
         },
         qualified: {
           ccl_qualification: "FAILED",
+          email_qualification: "FAILED",
           qualification: "FAILED",
           saml_qualification: "FAILED",
           samlid_qualification: "N/A",
@@ -109,18 +116,20 @@ describe("WORKDAY", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("Cloud Connect for Learning selected, SAML IDP not available", function () {
+    it("Cloud Connect for Learning selected, email in Workday Profile not available", function () {
       var testdefinition = {
         description:
-          "Cloud Connect for Learning selected, SAML IDP not available",
+          "Cloud Connect for Learning selected, email in Workday Profile not available",
         processed: {
           ccl: true,
+          email: false,
           samlidp: false,
           samlid: false,
           saml: false,
         },
         qualified: {
           ccl_qualification: "PASSED",
+          email_qualification: "FAILED",
           qualification: "FAILED",
           saml_qualification: "FAILED",
           samlid_qualification: "N/A",
@@ -128,6 +137,38 @@ describe("WORKDAY", function () {
         },
         qids: {
           QID4: "Yes",
+          QID44: "No",
+        },
+      };
+
+      var results = runValidationAndQualification(testdefinition);
+
+      expect(results.processed).to.eql(testdefinition.processed);
+      expect(results.qualified).to.eql(testdefinition.qualified);
+    });
+
+    it("Cloud Connect for Learning selected, email in Workday Profile, SAML IDP not available", function () {
+      var testdefinition = {
+        description:
+          "Cloud Connect for Learning selected, email in Workday Profile, SAML IDP not available",
+        processed: {
+          ccl: true,
+          email: true,
+          samlidp: false,
+          samlid: false,
+          saml: false,
+        },
+        qualified: {
+          ccl_qualification: "PASSED",
+          email_qualification: "PASSED",
+          qualification: "FAILED",
+          saml_qualification: "FAILED",
+          samlid_qualification: "N/A",
+          samlidp_qualification: "FAILED",
+        },
+        qids: {
+          QID4: "Yes",
+          QID44: "Yes",
           QID8: "No",
         },
       };
@@ -138,18 +179,20 @@ describe("WORKDAY", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("Cloud Connect for Learning selected, SAML IDP not available, SAML ID not available", function () {
+    it("Cloud Connect for Learning selected, email in Workday Profile, SAML IDP available, SAML ID not available", function () {
       var testdefinition = {
         description:
-          "Cloud Connect for Learning selected, SAML IDP available, SAML ID not available",
+          "Cloud Connect for Learning selected, email in Workday Profile, SAML IDP available, SAML ID not available",
         processed: {
           ccl: true,
+          email: true,
           samlidp: true,
           samlid: false,
           saml: false,
         },
         qualified: {
           ccl_qualification: "PASSED",
+          email_qualification: "PASSED",
           qualification: "FAILED",
           saml_qualification: "FAILED",
           samlid_qualification: "FAILED",
@@ -157,6 +200,7 @@ describe("WORKDAY", function () {
         },
         qids: {
           QID4: "Yes",
+          QID44: "Yes",
           QID8: "Yes",
           QID43: "No",
         },

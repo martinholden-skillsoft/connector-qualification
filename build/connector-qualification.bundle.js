@@ -1,11 +1,11 @@
-/*! connector-qualification.bundle.js - v1.1.1 - 2022-01-17T14:07:51+0000 */
+/*! connector-qualification.bundle.js - v1.1.1 - 2022-03-09T11:29:12+0000 */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var QUALIFICATION = QUALIFICATION || {};
 QUALIFICATION.VERSION = '1.1.1';
-QUALIFICATION.DATE = new Date('2022-01-17T14:07:51+0000'); // Source: node_modules/@ungap/global-this/index.js
+QUALIFICATION.DATE = new Date('2022-03-09T11:29:12+0000'); // Source: node_modules/@ungap/global-this/index.js
 
 (function (Object) {
   (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
@@ -1698,6 +1698,97 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         return status;
       }
     }, {
+      name: "email",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        return status;
+      }
+    }, {
+      name: "samlidp",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        return status;
+      }
+    }, {
+      name: "samlid",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        return status;
+      }
+    }, {
+      name: "saml",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        return status;
+      }
+    }],
+    QID44: [{
+      name: "email",
+      validresponses: ["Yes"],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        var answerstatus = false;
+
+        if (this.validresponses.length != 0) {
+          jQuery.each(this.validresponses, function (index, value) {
+            answerstatus = value.toLowerCase() === answer.toLowerCase();
+            return !status;
+          });
+        } else {
+          answerstatus = true;
+        }
+
+        var andstatus = true;
+        jQuery.each(this.dependencies.and, function (index, value) {
+          andstatus = andstatus && processed[value];
+        });
+        var orstatus = true;
+        jQuery.each(this.dependencies.or, function (index, value) {
+          orstatus = orstatus || processed[value];
+        });
+        status = answerstatus && andstatus && orstatus;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
       name: "samlidp",
       validresponses: [],
       dependencies: {
@@ -1862,7 +1953,7 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         var status = "N/A";
         var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
-        status = processed.ccl && processed.saml ? "PASSED" : "FAILED";
+        status = processed.ccl && processed.email && processed.saml ? "PASSED" : "FAILED";
         qualified[this.name] = status;
         Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
         Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
@@ -1875,6 +1966,18 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
         status = processed.ccl ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }, {
+      name: "email_qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.email ? "PASSED" : "FAILED";
         qualified[this.name] = status;
         Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
         Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
