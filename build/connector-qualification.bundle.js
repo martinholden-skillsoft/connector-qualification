@@ -1,11 +1,11 @@
-/*! connector-qualification.bundle.js - v1.1.2 - 2022-03-09T11:31:14+0000 */
+/*! connector-qualification.bundle.js - v1.1.3 - 2022-07-04T13:01:07+0100 - aac272280d5cf971dfe07a888982d49d675c3ffa */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var QUALIFICATION = QUALIFICATION || {};
-QUALIFICATION.VERSION = '1.1.2';
-QUALIFICATION.DATE = new Date('2022-03-09T11:31:14+0000'); // Source: node_modules/@ungap/global-this/index.js
+QUALIFICATION.VERSION = '1.1.3';
+QUALIFICATION.DATE = new Date('2022-07-04T13:01:07+0100'); // Source: node_modules/@ungap/global-this/index.js
 
 (function (Object) {
   (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
