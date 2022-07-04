@@ -6,6 +6,15 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: pkg,
 
+    gitlog: {
+      src: {
+        options: {
+          prop: "gitlog.result",
+          number: 1,
+        },
+      },
+    },
+
     watch: {
       files: ["src/**/*.js"],
       tasks: ["build"],
@@ -52,7 +61,7 @@ module.exports = function (grunt) {
       src: {
         options: {
           banner:
-            "var QUALIFICATION = QUALIFICATION || {};\nQUALIFICATION.VERSION = '<%= pkg.version %>';\nQUALIFICATION.DATE = new Date('<%= grunt.template.date(pkg.currentdate, 'isoDateTime') %>');\n\n",
+            "var QUALIFICATION = QUALIFICATION || {};\nQUALIFICATION.VERSION = '<%= pkg.version %>';\nQUALIFICATION.DATE = new Date('<%= grunt.template.date(gitlog.result[0].date, 'isoDateTime') %>');\n\n",
           sourceMap: false,
           stripBanners: false,
           process: function (src, filepath) {
@@ -78,7 +87,7 @@ module.exports = function (grunt) {
       bundle: {
         options: {
           banner:
-            '/*! <%= pkg.name %>.bundle.js - v<%= pkg.version %> - <%= grunt.template.date(pkg.currentdate, "isoDateTime") %> */\n',
+            '/*! <%= pkg.name %>.bundle.js - v<%= pkg.version %> - <%= grunt.template.date(gitlog.result[0].date, "isoDateTime") %> - <%= gitlog.result[0].hash %> */\n',
           sourceMap: true,
           stripBanners: false,
         },
@@ -92,7 +101,7 @@ module.exports = function (grunt) {
       bundle: {
         options: {
           banner:
-            '/*! <%= pkg.name %>.bundle.min.js - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */',
+            '/*! <%= pkg.name %>.bundle.min.js - v<%= pkg.version %> - <%= grunt.template.date(gitlog.result[0].date, "isoDateTime") %> - <%= gitlog.result[0].hash %> */',
           mangle: false,
           sourceMap: true,
           stripBanners: true,
@@ -120,11 +129,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks("grunt-babel");
   // Load the plugin that provides the "clean" task;
   grunt.loadNpmTasks("grunt-contrib-clean");
-  // Load the plugin that provides the "clean" task;
+  // Load the plugin that provides the "karma" task;
   grunt.loadNpmTasks("grunt-karma");
+  // Load the plugin that provides the "git" task;
+  grunt.loadNpmTasks("grunt-git");
 
   // Default task(s).
   grunt.registerTask("build", [
+    "gitlog:src",
     "concat:src",
     "babel",
     "concat:bundle",
