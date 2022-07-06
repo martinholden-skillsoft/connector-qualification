@@ -1,11 +1,11 @@
-/*! connector-qualification.bundle.js - v1.1.4 - 2022-07-06T10:47:08+0100 - e2723c1febd372d8858c647d60b724cc20eeec99 */
+/*! connector-qualification.bundle.js - v1.1.5 - 2022-07-06T16:55:40+0100 - f7b55861d5d33647a8a65df9a6af1f99bcf7bec0 */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var QUALIFICATION = QUALIFICATION || {};
-QUALIFICATION.VERSION = '1.1.4';
-QUALIFICATION.DATE = new Date('2022-07-06T10:47:08+0100'); // Source: node_modules/@ungap/global-this/index.js
+QUALIFICATION.VERSION = '1.1.5';
+QUALIFICATION.DATE = new Date('2022-07-06T16:55:40+0100'); // Source: node_modules/@ungap/global-this/index.js
 
 (function (Object) {
   (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
@@ -122,7 +122,10 @@ QUALIFICATION.CORNERSTONE = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -157,7 +160,10 @@ QUALIFICATION.CORNERSTONE = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -191,7 +197,10 @@ QUALIFICATION.CORNERSTONE = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -435,7 +444,10 @@ QUALIFICATION.DEGREED = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -469,7 +481,10 @@ QUALIFICATION.DEGREED = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -677,6 +692,401 @@ QUALIFICATION.DEGREED = function (window, document, Qualtrics, undefined) {
     getValidationRules: getValidationRules,
     getQualificationRules: getQualificationRules
   };
+}(window, document, Qualtrics, undefined); // Source: src/moodle.js
+
+
+QUALIFICATION.MOODLE = function (window, document, Qualtrics, undefined) {
+  /**
+   * @typedef {Object} QUALIFICATION.validationrule.dependencies
+   * @property {String[]} and An array of property names of an object to check (AND comparison)
+   * @property {String[]} or An array of property names of an object to check (OR comparison)
+   */
+
+  /**
+   * The function called to validate the result, this should set Qualtrics embedded data
+   * and return true/false
+   * @name QUALIFICATION.validationrule.run
+   * @function
+   * @param {String} answer The Qualtrics selectedChoice value, the text string
+   * @returns {boolean}
+   */
+
+  /**
+   * @typedef {Object} QUALIFICATION.validationrule
+   * @property {String} name The name of the validation rule
+   * @property {String[]} validresponses An array of strings that answer is compared to determine if valid
+   * @property {QUALIFICATION.validationrule.dependencies} dependencies The other values that must be true
+   * @property {QUALIFICATION.validationrule.run} run The function called to validate the result, this
+   *                                                  should set Qualtrics embedded data and return
+   *                                                  true/false
+   */
+
+  /**
+   * @typedef {Object} QUALIFICATION.validationrules
+   * @type {Object.<string, QUALIFICATION.validationrule[]>}
+   * @property {String} questionid The questionid (QID) for Qualtrics
+   * @property {QUALIFICATION.validationrule[]} rules An array of validation rules
+   */
+
+  /**
+   * The function called to qualify the captured data, this should set Qualtrics embedded data
+   * and return true/false
+   * @name QUALIFICATION.qualificationrule.run
+   * @function
+   * @returns {boolean}
+   */
+
+  /**
+   * @typedef {Object} QUALIFICATION.qualificationrule
+   * @property {String} name The name of the validation rule
+   * @property {QUALIFICATION.qualificationrule.run} run The function called to validate the result, this
+   *                                                  should set Qualtrics embedded data and return
+   *                                                  true/false
+   */
+
+  /**
+   * @typedef {Object} QUALIFICATION.qualificationrules
+   * @type {Object.<string, QUALIFICATION.qualificationrule[]>}
+   * @property {String} questionid The questionid (QID) for Qualtrics or ALL to process on all
+   * @property {QUALIFICATION.qualificationrule[]} rules An array of validation rules
+   */
+  var validationRules = {
+    QID4: [{
+      name: "version",
+      comment: "Check the version is a supported one",
+      validresponses: ["3.8", "3.9", "3.10", "3.11", "4.0"],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        var answerstatus = false;
+
+        if (this.validresponses.length != 0) {
+          jQuery.each(this.validresponses, function (index, value) {
+            answerstatus = value.toLowerCase() === answer.toLowerCase();
+
+            if (answerstatus) {
+              return false;
+            }
+          });
+        } else {
+          answerstatus = true;
+        }
+
+        var andstatus = true;
+        jQuery.each(this.dependencies.and, function (index, value) {
+          andstatus = andstatus && processed[value];
+        });
+        var orstatus = true;
+        jQuery.each(this.dependencies.or, function (index, value) {
+          orstatus = orstatus || processed[value];
+        });
+        status = answerstatus && andstatus && orstatus;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "internet",
+      comment: "Check the Moodle is Internet Visible and uses HTTPS with a valid certificate - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "installplugins",
+      comment: "Check the customer is able to install plugins into Moodle - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "enablewebservices",
+      comment: "Check the customer is able to enable inbound Web Services in Moodle - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }],
+    QID44: [{
+      name: "internet",
+      comment: "Check the Moodle is Internet Visible and uses HTTPS with a valid certificate",
+      validresponses: ["Yes"],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        var answerstatus = false;
+
+        if (this.validresponses.length != 0) {
+          jQuery.each(this.validresponses, function (index, value) {
+            answerstatus = value.toLowerCase() === answer.toLowerCase();
+
+            if (answerstatus) {
+              return false;
+            }
+          });
+        } else {
+          answerstatus = true;
+        }
+
+        var andstatus = true;
+        jQuery.each(this.dependencies.and, function (index, value) {
+          andstatus = andstatus && processed[value];
+        });
+        var orstatus = true;
+        jQuery.each(this.dependencies.or, function (index, value) {
+          orstatus = orstatus || processed[value];
+        });
+        status = answerstatus && andstatus && orstatus;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "installplugins",
+      comment: "Check the customer is able to install plugins into Moodle - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "enablewebservices",
+      comment: "Check the customer is able to enable inbound Web Services in Moodle - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }],
+    QID8: [{
+      name: "installplugins",
+      comment: "Check the customer is able to install plugins into Moodle",
+      validresponses: ["Yes"],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        var answerstatus = false;
+
+        if (this.validresponses.length != 0) {
+          jQuery.each(this.validresponses, function (index, value) {
+            answerstatus = value.toLowerCase() === answer.toLowerCase();
+
+            if (answerstatus) {
+              return false;
+            }
+          });
+        } else {
+          answerstatus = true;
+        }
+
+        var andstatus = true;
+        jQuery.each(this.dependencies.and, function (index, value) {
+          andstatus = andstatus && processed[value];
+        });
+        var orstatus = true;
+        jQuery.each(this.dependencies.or, function (index, value) {
+          orstatus = orstatus || processed[value];
+        });
+        status = answerstatus && andstatus && orstatus;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }, {
+      name: "enablewebservices",
+      comment: "Check the customer is able to enable inbound Web Services in Moodle - RESET TO FALSE ON THIS QUESTION",
+      validresponses: [],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }],
+    QID43: [{
+      name: "enablewebservices",
+      comment: "Check the customer is able to enable inbound Web Services in Moodle",
+      validresponses: ["Yes"],
+      dependencies: {
+        and: [],
+        or: []
+      },
+      run: function run(answer) {
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var status = false;
+        var answerstatus = false;
+
+        if (this.validresponses.length != 0) {
+          jQuery.each(this.validresponses, function (index, value) {
+            answerstatus = value.toLowerCase() === answer.toLowerCase();
+
+            if (answerstatus) {
+              return false;
+            }
+          });
+        } else {
+          answerstatus = true;
+        }
+
+        var andstatus = true;
+        jQuery.each(this.dependencies.and, function (index, value) {
+          andstatus = andstatus && processed[value];
+        });
+        var orstatus = true;
+        jQuery.each(this.dependencies.or, function (index, value) {
+          orstatus = orstatus || processed[value];
+        });
+        status = answerstatus && andstatus && orstatus;
+        processed[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+        return status;
+      }
+    }]
+  };
+  var qualificationRules = {
+    ALL: [{
+      name: "qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.version && processed.internet && processed.installplugins && processed.enablewebservices ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }, {
+      name: "version_qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.version ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }, {
+      name: "internet_qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.internet ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }, {
+      name: "installplugins_qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.installplugins ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }, {
+      name: "enablewebservices_qualification",
+      run: function run() {
+        var status = "N/A";
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
+        status = processed.enablewebservices ? "PASSED" : "FAILED";
+        qualified[this.name] = status;
+        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
+        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
+        return status;
+      }
+    }]
+  };
+  /**
+   * Get the validation rules
+   *
+   * @returns {QUALIFICATION.validationrules} rules The validation rules object
+   *
+   */
+
+  function getValidationRules() {
+    return validationRules;
+  }
+  /**
+   * Get the qualification rules
+   *
+   * @returns {QUALIFICATION.qualificationrules} rules The qualification rules object
+   *
+   */
+
+
+  function getQualificationRules() {
+    return qualificationRules;
+  }
+
+  return {
+    getValidationRules: getValidationRules,
+    getQualificationRules: getQualificationRules
+  };
 }(window, document, Qualtrics, undefined); // Source: src/sabacloud.js
 
 
@@ -751,7 +1161,10 @@ QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -786,7 +1199,10 @@ QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -820,7 +1236,10 @@ QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -855,7 +1274,10 @@ QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -890,7 +1312,10 @@ QUALIFICATION.SABACLOUD = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1071,41 +1496,6 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
    * @property {QUALIFICATION.qualificationrule[]} rules An array of validation rules
    */
   var validationRules = {
-    QID4: [{
-      name: "sass",
-      validresponses: ["Yes"],
-      dependencies: {
-        and: [],
-        or: []
-      },
-      run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
-        var status = false;
-        var answerstatus = false;
-
-        if (this.validresponses.length != 0) {
-          jQuery.each(this.validresponses, function (index, value) {
-            answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
-          });
-        } else {
-          answerstatus = true;
-        }
-
-        var andstatus = true;
-        jQuery.each(this.dependencies.and, function (index, value) {
-          andstatus = andstatus && processed[value];
-        });
-        var orstatus = true;
-        jQuery.each(this.dependencies.or, function (index, value) {
-          orstatus = orstatus || processed[value];
-        });
-        status = answerstatus && andstatus && orstatus;
-        processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
-        return status;
-      }
-    }],
     QID8: [{
       name: "embeddedsaml",
       validresponses: ["SuccessFactors SAML Identity Provider"],
@@ -1121,7 +1511,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1155,7 +1548,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1189,7 +1585,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1284,7 +1683,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1319,7 +1721,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1368,7 +1773,10 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1410,19 +1818,7 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
         var status = "N/A";
         var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
-        status = processed.sass && processed.saml && processed.itemconnector && (processed.odataapi || processed.learninghistoryconnector) ? "PASSED" : "FAILED";
-        qualified[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
-        Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
-        return status;
-      }
-    }, {
-      name: "sass_qualification",
-      run: function run() {
-        var status = "N/A";
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
-        var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
-        status = processed.sass ? "PASSED" : "FAILED";
+        status = processed.saml && processed.itemconnector && (processed.odataapi || processed.learninghistoryconnector) ? "PASSED" : "FAILED";
         qualified[this.name] = status;
         Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
         Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
@@ -1678,7 +2074,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1705,10 +2104,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }, {
@@ -1719,10 +2118,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }, {
@@ -1733,10 +2132,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }, {
@@ -1747,10 +2146,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }],
@@ -1769,7 +2168,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1796,10 +2198,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }, {
@@ -1810,10 +2212,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }, {
@@ -1824,10 +2226,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         or: []
       },
       run: function run(answer) {
-        var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
+        var processed = Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
         var status = false;
         processed[this.name] = status;
-        Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
+        Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
         return status;
       }
     }],
@@ -1846,7 +2248,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
@@ -1910,7 +2315,10 @@ QUALIFICATION.WORKDAY = function (window, document, Qualtrics, undefined) {
         if (this.validresponses.length != 0) {
           jQuery.each(this.validresponses, function (index, value) {
             answerstatus = value.toLowerCase() === answer.toLowerCase();
-            return !status;
+
+            if (answerstatus) {
+              return false;
+            }
           });
         } else {
           answerstatus = true;
