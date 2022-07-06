@@ -73,7 +73,9 @@ QUALIFICATION.DEGREED = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -110,7 +112,9 @@ QUALIFICATION.DEGREED = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;

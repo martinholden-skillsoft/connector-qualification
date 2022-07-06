@@ -73,7 +73,9 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -99,60 +101,64 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
         name: "email",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
       {
         name: "samlidp",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
       {
         name: "samlid",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
       {
         name: "saml",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
     ],
@@ -172,7 +178,9 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -198,45 +206,48 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
         name: "samlidp",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
       {
         name: "samlid",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
       {
         name: "saml",
         validresponses: [],
         dependencies: {
-            and: [],
-            or: [],
+          and: [],
+          or: [],
         },
         run: function (answer) {
-            var processed = Qualtrics.SurveyEngine.getEmbeddedData('processed_state') || {};
-            var status = false;
-            processed[this.name] = status;
-            Qualtrics.SurveyEngine.setEmbeddedData('processed_state', processed);
-            return status;
+          var processed =
+            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
+          var status = false;
+          processed[this.name] = status;
+          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
+          return status;
         },
       },
     ],
@@ -256,7 +267,9 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -328,7 +341,9 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -380,7 +395,10 @@ QUALIFICATION.WORKDAY = (function (window, document, Qualtrics, undefined) {
             Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
           var qualified =
             Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
-          status = processed.ccl && processed.email && processed.saml ? "PASSED" : "FAILED";
+          status =
+            processed.ccl && processed.email && processed.saml
+              ? "PASSED"
+              : "FAILED";
           qualified[this.name] = status;
           Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
           Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);

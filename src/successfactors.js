@@ -78,7 +78,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -117,7 +119,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -154,7 +158,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -268,7 +274,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -307,7 +315,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
@@ -362,7 +372,9 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           if (this.validresponses.length != 0) {
             jQuery.each(this.validresponses, function (index, value) {
               answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
+              if (answerstatus) {
+                return false;
+              }
             });
           } else {
             answerstatus = true;
