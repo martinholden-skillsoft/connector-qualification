@@ -1,11 +1,11 @@
-/*! connector-qualification.bundle.js - v1.1.3 - 2022-07-04T13:01:07+0100 - aac272280d5cf971dfe07a888982d49d675c3ffa */
+/*! connector-qualification.bundle.js - v1.1.4 - 2022-07-06T10:47:08+0100 - e2723c1febd372d8858c647d60b724cc20eeec99 */
 "use strict";
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var QUALIFICATION = QUALIFICATION || {};
-QUALIFICATION.VERSION = '1.1.3';
-QUALIFICATION.DATE = new Date('2022-07-04T13:01:07+0100'); // Source: node_modules/@ungap/global-this/index.js
+QUALIFICATION.VERSION = '1.1.4';
+QUALIFICATION.DATE = new Date('2022-07-06T10:47:08+0100'); // Source: node_modules/@ungap/global-this/index.js
 
 (function (Object) {
   (typeof globalThis === "undefined" ? "undefined" : _typeof(globalThis)) !== 'object' && (this ? get() : (Object.defineProperty(Object.prototype, '_T_', {
@@ -1569,7 +1569,7 @@ QUALIFICATION.SUCCESSFACTORS = function (window, document, Qualtrics, undefined)
     QID49: [{
       name: "odataapi_qualification",
       run: function run() {
-        var status = "N/A";
+        var status = "FAILED";
         var qualified = Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
         qualified[this.name] = status;
         Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
