@@ -675,7 +675,7 @@ QUALIFICATION.SUCCESSFACTORS = (function (
       {
         name: "odataapi_qualification",
         run: function () {
-          var status = "N/A";
+          var status = "FAILED";
           var qualified =
             Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
           qualified[this.name] = status;

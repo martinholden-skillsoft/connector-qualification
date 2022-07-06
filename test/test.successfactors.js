@@ -119,7 +119,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "PASSED",
           othersaml_qualification: "N/A",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
@@ -200,7 +200,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "FAILED",
           othersaml_qualification: "N/A",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
@@ -282,7 +282,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "N/A",
           othersaml_qualification: "PASSED",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
@@ -324,7 +324,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "FAILED",
           othersaml_qualification: "N/A",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
@@ -477,7 +477,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "PASSED",
           othersaml_qualification: "N/A",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
@@ -558,7 +558,7 @@ describe("SUCCESSFACTORS", function () {
           iassaml_qualification: "N/A",
           othersaml_qualification: "PASSED",
           itemconnector_qualification: "PASSED",
-          odataapi_qualification: "N/A",
+          odataapi_qualification: "FAILED",
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
