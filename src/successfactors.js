@@ -62,45 +62,6 @@ QUALIFICATION.SUCCESSFACTORS = (function (
    */
 
   var validationRules = {
-    QID4: [
-      {
-        name: "sass",
-        validresponses: ["Yes"],
-        dependencies: {
-          and: [],
-          or: [],
-        },
-        run: function (answer) {
-          var processed =
-            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
-          var status = false;
-          var answerstatus = false;
-          if (this.validresponses.length != 0) {
-            jQuery.each(this.validresponses, function (index, value) {
-              answerstatus = value.toLowerCase() === answer.toLowerCase();
-              return !status;
-            });
-          } else {
-            answerstatus = true;
-          }
-
-          var andstatus = true;
-          jQuery.each(this.dependencies.and, function (index, value) {
-            andstatus = andstatus && processed[value];
-          });
-
-          var orstatus = true;
-          jQuery.each(this.dependencies.or, function (index, value) {
-            orstatus = orstatus || processed[value];
-          });
-
-          status = answerstatus && andstatus && orstatus;
-          processed[this.name] = status;
-          Qualtrics.SurveyEngine.setEmbeddedData("processed_state", processed);
-          return status;
-        },
-      },
-    ],
     QID8: [
       {
         name: "embeddedsaml",
@@ -453,27 +414,11 @@ QUALIFICATION.SUCCESSFACTORS = (function (
           var qualified =
             Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
           status =
-            processed.sass &&
             processed.saml &&
             processed.itemconnector &&
             (processed.odataapi || processed.learninghistoryconnector)
               ? "PASSED"
               : "FAILED";
-          qualified[this.name] = status;
-          Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
-          Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);
-          return status;
-        },
-      },
-      {
-        name: "sass_qualification",
-        run: function () {
-          var status = "N/A";
-          var processed =
-            Qualtrics.SurveyEngine.getEmbeddedData("processed_state") || {};
-          var qualified =
-            Qualtrics.SurveyEngine.getEmbeddedData("qualified_state") || {};
-          status = processed.sass ? "PASSED" : "FAILED";
           qualified[this.name] = status;
           Qualtrics.SurveyEngine.setEmbeddedData(this.name, status);
           Qualtrics.SurveyEngine.setEmbeddedData("qualified_state", qualified);

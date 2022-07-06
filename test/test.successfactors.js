@@ -39,7 +39,6 @@ describe("SUCCESSFACTORS", function () {
   beforeEach(function () {
     // runs before each test in this block
     Qualtrics.SurveyEngine.setEmbeddedData("processed_state", {
-      sass: false,
       embeddedsaml: false,
       iassaml: false,
       othersaml: false,
@@ -57,11 +56,10 @@ describe("SUCCESSFACTORS", function () {
   });
 
   describe("Expect qualification to succeed", function () {
-    it("SuccessFactors Version, IAS SAML, Item Connector, ODATA", function () {
+    it("IAS SAML, Item Connector, ODATA", function () {
       var testdefinition = {
-        description: "SuccessFactors Version, IAS SAML, Item Connector, ODATA",
+        description: "IAS SAML, Item Connector, ODATA",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: true,
           othersaml: false,
@@ -73,7 +71,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "PASSED",
@@ -83,7 +80,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "N/A",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SAP Cloud Identity Services - Identity Authentication (IAS)",
           QID42: "Yes",
           QID43: "Yes",
@@ -96,12 +92,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, IAS SAML, Item Connector, Learning History", function () {
+    it("IAS SAML, Item Connector, Learning History", function () {
       var testdefinition = {
-        description:
-          "SuccessFactors Version, IAS SAML, Item Connector, Learning History",
+        description: "IAS SAML, Item Connector, Learning History",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: true,
           othersaml: false,
@@ -113,7 +107,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "PASSED",
@@ -137,12 +130,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Embedded SAML, Item Connector, ODATA", function () {
+    it("Embedded SAML, Item Connector, ODATA", function () {
       var testdefinition = {
-        description:
-          "SuccessFactors Version, Embedded SAML, Item Connector, ODATA",
+        description: "Embedded SAML, Item Connector, ODATA",
         processed: {
-          sass: true,
           embeddedsaml: true,
           iassaml: false,
           othersaml: false,
@@ -154,7 +145,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "PASSED",
           iassaml_qualification: "FAILED",
@@ -164,7 +154,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "N/A",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SuccessFactors SAML Identity Provider",
           QID42: "Yes",
           QID43: "Yes",
@@ -177,12 +166,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Embedded SAML, Item Connector, Learning History", function () {
+    it("Embedded SAML, Item Connector, Learning History", function () {
       var testdefinition = {
-        description:
-          "SuccessFactors Version, Embedded SAML, Item Connector, Learning History",
+        description: " Embedded SAML, Item Connector, Learning History",
         processed: {
-          sass: true,
           embeddedsaml: true,
           iassaml: false,
           othersaml: false,
@@ -194,7 +181,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "PASSED",
           iassaml_qualification: "FAILED",
@@ -204,7 +190,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SuccessFactors SAML Identity Provider",
           QID42: "Yes",
           QID43: "No",
@@ -218,12 +203,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Other SAML, Student ID, Item Connector, ODATA", function () {
+    it("Other SAML, Student ID, Item Connector, ODATA", function () {
       var testdefinition = {
-        description:
-          "SuccessFactors Version, Other SAML, Student ID, Item Connector, ODATA",
+        description: "Other SAML, Student ID, Item Connector, ODATA",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: false,
           othersaml: true,
@@ -235,7 +218,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "N/A",
@@ -245,7 +227,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "N/A",
         },
         qids: {
-          QID4: "Yes",
           QID8: "Other SAML Identity Provider",
           QID35: "Yes",
           QID42: "Yes",
@@ -259,12 +240,11 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Other SAML, Student ID, Item Connector, Learning History", function () {
+    it("Other SAML, Student ID, Item Connector, Learning History", function () {
       var testdefinition = {
         description:
-          "SuccessFactors Version, Other SAML, Student ID, Item Connector, Learning History",
+          "SOther SAML, Student ID, Item Connector, Learning History",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: false,
           othersaml: true,
@@ -276,7 +256,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "N/A",
@@ -286,7 +265,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "Other SAML Identity Provider",
           QID35: "Yes",
           QID42: "Yes",
@@ -301,12 +279,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Embedded SAML, Item Connector, Learning History", function () {
+    it("Embedded SAML, Item Connector, Learning History", function () {
       var testdefinition = {
-        description:
-          "SuccessFactors Version, Embedded SAML, Item Connector, Learning History",
+        description: "Embedded SAML, Item Connector, Learning History",
         processed: {
-          sass: true,
           embeddedsaml: true,
           iassaml: false,
           othersaml: false,
@@ -318,7 +294,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "PASSED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "PASSED",
           iassaml_qualification: "FAILED",
@@ -328,7 +303,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "PASSED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SuccessFactors SAML Identity Provider",
           QID42: "Yes",
           QID43: "No",
@@ -343,11 +317,10 @@ describe("SUCCESSFACTORS", function () {
     });
   });
   describe("Expect qualification to fail", function () {
-    it("SuccessFactors Version not minimum", function () {
+    it("No SAML", function () {
       var testdefinition = {
-        description: "SuccessFactors Version not minimum",
+        description: "No SAML",
         processed: {
-          sass: false,
           embeddedsaml: false,
           iassaml: false,
           othersaml: false,
@@ -359,7 +332,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "FAILED",
-          sass_qualification: "FAILED",
           saml_qualification: "FAILED",
           embeddedsaml_qualification: "FAILED",
           iassaml_qualification: "FAILED",
@@ -369,43 +341,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
-          QID4: "No",
-        },
-      };
-
-      var results = runValidationAndQualification(testdefinition);
-
-      expect(results.processed).to.eql(testdefinition.processed);
-      expect(results.qualified).to.eql(testdefinition.qualified);
-    });
-
-    it("SuccessFactors Version, No SAML", function () {
-      var testdefinition = {
-        description: "SuccessFactors Version, No SAML",
-        processed: {
-          sass: true,
-          embeddedsaml: false,
-          iassaml: false,
-          othersaml: false,
-          othersamlid: false,
-          saml: false,
-          itemconnector: false,
-          odataapi: false,
-          learninghistoryconnector: false,
-        },
-        qualified: {
-          qualification: "FAILED",
-          sass_qualification: "PASSED",
-          saml_qualification: "FAILED",
-          embeddedsaml_qualification: "FAILED",
-          iassaml_qualification: "FAILED",
-          othersaml_qualification: "FAILED",
-          itemconnector_qualification: "FAILED",
-          odataapi_qualification: "FAILED",
-          learninghistoryconnector_qualification: "FAILED",
-        },
-        qids: {
-          QID4: "Yes",
           QID8: "I cannot use SAML",
         },
       };
@@ -416,11 +351,10 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, IAS SAML, No Item Connector", function () {
+    it("IAS SAML, No Item Connector", function () {
       var testdefinition = {
-        description: "SuccessFactors Version, IAS SAML, No Item Connector",
+        description: "IAS SAML, No Item Connector",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: true,
           othersaml: false,
@@ -432,7 +366,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "FAILED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "PASSED",
@@ -442,7 +375,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SAP Cloud Identity Services - Identity Authentication (IAS)",
           QID42: "No",
         },
@@ -454,12 +386,11 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, IAS SAML, Item Connector, No ODATA, No Learning History", function () {
+    it("IAS SAML, Item Connector, No ODATA, No Learning History", function () {
       var testdefinition = {
         description:
-          "SuccessFactors Version, IAS SAML, Item Connector, No ODATA, No Learning History",
+          "IAS SAML, Item Connector, No ODATA, No Learning History",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: true,
           othersaml: false,
@@ -471,7 +402,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "FAILED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "PASSED",
@@ -481,7 +411,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "SAP Cloud Identity Services - Identity Authentication (IAS)",
           QID42: "Yes",
           QID43: "No",
@@ -495,12 +424,11 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Other SAML, Student ID, No Item Connector", function () {
+    it("Other SAML, Student ID, No Item Connector", function () {
       var testdefinition = {
         description:
-          "SuccessFactors Version, Other SAML, Student ID, No Item Connector",
+          "Other SAML, Student ID, No Item Connector",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: false,
           othersaml: true,
@@ -512,7 +440,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "FAILED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "N/A",
@@ -522,7 +449,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "Other SAML Identity Provider",
           QID35: "Yes",
           QID42: "No",
@@ -535,12 +461,11 @@ describe("SUCCESSFACTORS", function () {
       expect(results.qualified).to.eql(testdefinition.qualified);
     });
 
-    it("SuccessFactors Version, Other SAML, Student ID, Item Connector, No ODATA, No Learning History", function () {
+    it("Other SAML, Student ID, Item Connector, No ODATA, No Learning History", function () {
       var testdefinition = {
         description:
-          "SuccessFactors Version, Other SAML, Student ID, No ODATA, No Learning History",
+          "Other SAML, Student ID, No ODATA, No Learning History",
         processed: {
-          sass: true,
           embeddedsaml: false,
           iassaml: false,
           othersaml: true,
@@ -552,7 +477,6 @@ describe("SUCCESSFACTORS", function () {
         },
         qualified: {
           qualification: "FAILED",
-          sass_qualification: "PASSED",
           saml_qualification: "PASSED",
           embeddedsaml_qualification: "N/A",
           iassaml_qualification: "N/A",
@@ -562,7 +486,6 @@ describe("SUCCESSFACTORS", function () {
           learninghistoryconnector_qualification: "FAILED",
         },
         qids: {
-          QID4: "Yes",
           QID8: "Other SAML Identity Provider",
           QID35: "Yes",
           QID42: "Yes",
