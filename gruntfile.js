@@ -142,6 +142,10 @@ module.exports = function (grunt) {
     "concat:bundle",
     "uglify",
     "clean",
+  ]);
+
+  grunt.registerTask("test", [
+    "build",
     "karma",
   ]);
   grunt.registerTask("default", ["build"]);

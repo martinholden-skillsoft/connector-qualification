@@ -14,8 +14,7 @@
     "clean-build": "rimraf ./build && mkdirp ./build",
     "prebuild": "npm run clean-build",
     "build": "grunt",
-    "pretest": "npm run build",
-    "test": "grunt karma"
+    "test": "grunt test"
   },
   "keywords": [],
   "author": {
